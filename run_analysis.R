@@ -17,6 +17,7 @@ if (suppressWarnings(dir.create(datadirectory)) == TRUE){
 ############## 1. MERGE TRAINING AND TEST SETS #######
 ### features.txt: List of all features
 features <- read.table("./UCI HAR Dataset/features.txt")
+
 ### read in data sets using features as column labels
 x_train <- read.table("./UCI HAR Dataset/train/X_train.txt",
                       col.names = features[,2])
@@ -60,6 +61,11 @@ step3_dataset <- mutate(step2_dataset, Activity = activity_labels[Activity, 2])
 step4_dataset <- step3_dataset
 # remove duplicate "Body" from some variable names
 names(step4_dataset) <- gsub("BodyBody", "Body", names(step3_dataset))
+# simplify variable names (problematic characters were converted to . when used as col.names)
+names(step4_dataset) <- gsub("\\.mean\\.\\.", "Mean", names(step4_dataset))
+names(step4_dataset) <- gsub("\\.std\\.\\.", "Stdv", names(step4_dataset))
+# replace last problematic character before axis 
+names(step4_dataset) <- gsub("\\.", "_", names(step4_dataset))
 
 ############ 5. AVERAGE EACH VARIABLE FOR EACH ACTIVITY AND EACH SUBJECT #####
 step5_dataset <- step4_dataset %>% 
@@ -68,3 +74,4 @@ step5_dataset <- step4_dataset %>%
 
 ########## 6. CREATE OUTPUT FILE FOR SUBMISSION ########
 write.table(step5_dataset, file = "SamsungData_tidy.txt", row.names = FALSE)
+
