@@ -35,7 +35,7 @@ Each activity was perfomed by all subjects multiple times and accelerometer and 
 ### General Description
 Dataset is 180 rows by 68 columns with column headers - 219 kB
 
-Rows record the observations for 6 activities performed by each of the 30 subjects.  Columns record Subject, Activity, and mean and standard deviation for 33 measurements.
+Rows record the observations for 6 activities performed by each of the 30 subjects.  Columns record Subject, Activity, and mean and standard deviation for 33 measurements.  All measurements were normalized.
 
 From Anguita, et al:
 > The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc_XYZ and tGyro_XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc_XYZ and tGravityAcc_XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
@@ -118,22 +118,16 @@ Classes ‘grouped_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	180 obs. of 
  * fBodyGyroJerkMagMean: num  -0.942 -0.99 -0.995 -0.319 -0.282 ...
  * fBodyGyroJerkMagStdv: num  -0.933 -0.987 -0.995 -0.382 -0.392 ...
 
- #### Subject    
+ #### Subject  
+ Subjects were identified with a number from 1 to 30.  
  Min.   : 1.0  
  1st Qu.: 8.0  
  Median :15.5  
  Mean   :15.5  
  3rd Qu.:23.0  
  Max.   :30.0  
-Short description of what the variable describes.
-
-Some information on the variable including:
- - Class of the variable
- - Unique values/levels of the variable
- - Unit of measurement (if no unit of measurement list this as well)
- - In case names follow some schema, describe how entries were constructed (for example time-body-gyroscope-z has 4 levels of descriptors. Describe these 4 levels). 
-
 #### Activity 
+Each subject engaged in each of the six activities while wearing the smartphone at their waist.  
  LAYING            :30  
  SITTING           :30  
  STANDING          :30  
@@ -237,7 +231,6 @@ The average standard deviation of the gravity component of the time domain accel
  3rd Qu.:-0.9180  
  Max.   :-0.6102  
 #### tBodyAccJerkMean_X
-
  Min.   :0.04269   
  1st Qu.:0.07396   
  Median :0.07640   
