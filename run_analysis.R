@@ -36,13 +36,34 @@ y_test <- read.table("./UCI HAR Dataset/test/y_test.txt",
 training_set <- cbind(y_train, xsub_train)
 testing_set <- cbind(y_test, xsub_test)
 ### merge training and testing datasets
-complete_dataset <- rbind(training_set, testing_set)
+step1_dataset <- rbind(training_set, testing_set)
 
 ################# 2. EXTRACT MEAN AND STDV FOR EACH MEASUREMENT #########
-extracted_dataset <- select(complete_dataset, Subject, Activity,
+# exclude meanFreq(uency) of fourier transformed measurements
+step2_dataset <- select(step1_dataset, Subject, Activity,
                             grep("mean|std", names(complete_dataset)), 
                             -grep("meanFreq", names(complete_dataset)))
 
-################# 3. APPLY DESCRIPTIVE ACTIVITY NAMES #########
+################# 3. USE DESCRIPTIVE ACTIVITY NAMES #########
+# read in activities
 activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt")
-activity_dataset <- mutate(extracted_dataset, Activity = activity_labels[Activity, 2])
+# convert integers in dataset into activities
+step3_dataset <- mutate(step2_dataset, Activity = activity_labels[Activity, 2])
+
+################# 4. LABEL WITH DESCRIPTIVE VARIABLE NAMES ####
+## NOTE: Descriptive variable names were applied when the data was read in,
+##       using the col.names option in read.table.
+##       However, some of the variable names have a typo
+
+# assign values from old variable names
+step4_dataset <- step3_dataset
+# remove duplicate "Body" from some variable names
+names(step4_dataset) <- gsub("BodyBody", "Body", names(step3_dataset))
+
+############ 5. AVERAGE EACH VARIABLE FOR EACH ACTIVITY AND EACH SUBJECT #####
+step5_dataset <- step4_dataset %>% 
+    group_by(Subject, Activity) %>% 
+    summarise_each(funs(mean))
+
+########## 6. CREATE OUTPUT FILE FOR SUBMISSION ########
+write.table(step5_dataset, file = "SamsungData_tidy.txt", row.names = FALSE)
