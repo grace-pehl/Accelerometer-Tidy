@@ -4,12 +4,13 @@ sourceURL = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%
 sourcefile = "getdata-projectfiles-UCI HAR Dataset.zip"
 datadirectory = "UCI HAR Dataset"
 
-### download the file, if necessary
-if (!file.exists(sourcefile)){
-    download.file(sourceURL, sourcefile, mode="wb")
-}
-### unzip the file into local directory
+### check if data directory already exists
 if (suppressWarnings(dir.create(datadirectory)) == TRUE){
+    ### download the file, if necessary
+    if (!file.exists(sourcefile)){
+        download.file(sourceURL, sourcefile, mode="wb")
+    }
+    ### unzip the file into local directory
     unzip(sourcefile)
 }      
 
@@ -41,8 +42,8 @@ step1_dataset <- rbind(training_set, testing_set)
 ################# 2. EXTRACT MEAN AND STDV FOR EACH MEASUREMENT #########
 # exclude meanFreq(uency) of fourier transformed measurements
 step2_dataset <- select(step1_dataset, Subject, Activity,
-                            grep("mean|std", names(complete_dataset)), 
-                            -grep("meanFreq", names(complete_dataset)))
+                            grep("mean|std", names(step1_dataset)), 
+                            -grep("meanFreq", names(step1_dataset)))
 
 ################# 3. USE DESCRIPTIVE ACTIVITY NAMES #########
 # read in activities
