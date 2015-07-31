@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Wrangling and Cleaning Data by grace-pehl</title>
+    <title>Grace Pehl, PhD by grace-pehl</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,28 +11,51 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Wrangling and Cleaning Data</h1>
-      <h2 class="project-tagline">Creating a tidy dataset of accelerometer readings for Coursera Getting &amp; Cleaning Data course</h2>
+      <h1 class="project-name">Grace Pehl, PhD</h1>
+      <h2 class="project-tagline">Creating a tidy dataset of smartphone accelerometer readings</h2>
       <a href="https://github.com/grace-pehl/Accelerometer-Tidy" class="btn">View on GitHub</a>
       <a href="https://github.com/grace-pehl/Accelerometer-Tidy/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/grace-pehl/Accelerometer-Tidy/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="data-wrangling-and-cleaning-exercise" class="anchor" href="#data-wrangling-and-cleaning-exercise" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Wrangling and Cleaning Exercise</h1>
+      <p>Compiled text files into a single dataframe using dplyr package for R and output a tidy dataset ready for analysis.  Project for Getting and Cleaning Data course of Johns Hopkins data science specialization.</p>
+
+<h1>
+<a id="study-design" class="anchor" href="#study-design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Study Design</h1>
+
+<p>The raw dataset was taken from Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012.</p>
 
 <h2>
-<a id="grace-pehl-phd" class="anchor" href="#grace-pehl-phd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Grace Pehl, PhD.</h2>
+<a id="collection-of-the-raw-data" class="anchor" href="#collection-of-the-raw-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Collection of the Raw Data</h2>
 
-<p>Data taken from <em>Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012</em></p>
+<p>A complete description of the experimental design is available <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">here</a>.</p>
 
-<p>Script run_analysis.R will download the zipped datafile, unzip it into the local directory unless the .zip file and UCI HAR Dataset directory are already present in the working directory. The script will read and merge the data and labeling files into a single dataframe.  The script will select the mean and standard deviation for each variable measured by Anguita, et al.  The averages of each variable for each subject and measured activity will be output as a text file "SamsungData_tidy.txt" </p>
+<p>30 volunteeres aged 19-48 performed 6 activities while wearing a Samsung Galaxy S II smartphone. Linear acceleration and angular velocity were measured by the phone's embedded accelerometer and gyroscope.</p>
 
-<p>Requires dplyr package.  Data is described in Codebook.md</p>
+<h2>
+<a id="notes-on-the-raw-data" class="anchor" href="#notes-on-the-raw-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes on the Raw Data</h2>
+
+<p>Data was collected at a constant rate of 50 Hz along three axes (XYZ). Data was subsequently filtered and separated as described for each variable. All measurements were then normalized to zero with bounds -1, 1.</p>
+
+<h1>
+<a id="creating-the-tidy-datafile" class="anchor" href="#creating-the-tidy-datafile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating the Tidy Datafile</h1>
+
+<h2>
+<a id="guide-to-create-the-tidy-data-file" class="anchor" href="#guide-to-create-the-tidy-data-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Guide to Create the Tidy Data File</h2>
+
+<p>Download the analysis script run_analysis.R from GitHub into your working directory and run the script in R.
+The script will check if the raw data zip file is present in the directory and download it if necessary.
+If "/UCI HAR Dataset" is not present, the script will unzip the raw data file
+The script will merge the training and test data with subject identifiers, activity labels, and measurement variable names.
+The average of the mean and standard deviation for each measurement will be output for each activity and subject.
+The output is written to "SamsungData_tidy.txt" using write.table with row.names = FALSE.
+Cleaning of the data</p>
+
+<p>Each activity was perfomed by all subjects multiple times and accelerometer and gyroscope readings were collected. The normalized mean and standard deviation were calculted for each variable and recorded for each observation. These means and standard deviations are averaged by the cleaning script to create one pair of values for each measurement per activity and subject.</p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/grace-pehl/Accelerometer-Tidy">Wrangling and Cleaning Data</a> is maintained by <a href="https://github.com/grace-pehl">grace-pehl</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/grace-pehl/Accelerometer-Tidy">Grace Pehl, PhD</a> is maintained by <a href="https://github.com/grace-pehl">grace-pehl</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
